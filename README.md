@@ -29,7 +29,7 @@ Under Budget setup, choose Use a template (simplified)
 
 Under Templates, choose a template that best matches your use case:
 
-    (select) Zero spend budget: A budget that notifies you after your spending exceeds AWS Free Tier limits.
+Select Zero spend budget: A budget that notifies you after your spending exceeds AWS Free Tier limits.
 
 Enter Email Receiptents
 
@@ -49,7 +49,7 @@ Source: [Setting permissions for website access](https://docs.aws.amazon.com/Ama
 
 
 ### Create Bucket & Upload Files 
-[Create S3 Bucket] (https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)
+[Create S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html))
 
 **** Download & Unzip folder, Resume-HTML
 
@@ -68,46 +68,30 @@ Click icon, Create bucket
 
 Under Bucket Policy, choose Edit.
 
-Copy the following bucket policy, and paste it in the Bucket policy editor, NOTE Under Resource section, update bucket name.
-
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "PublicReadGetObject",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": [
-                "s3:GetObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::Replace-Bucket-Name/*"
-            ]
-        }
-    ]
-}
-
-Click Save changes
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html
 
 ### Choose Properties
 
-    Under Static website hosting, choose Edit.
+Under Static website hosting, choose Edit.
 
-    Choose Use this bucket to host a website.
+Choose Use this bucket to host a website.
 
-    Under Static website hosting, choose Enable.
+Under Static website hosting, choose Enable.
 
-    In Index document, enter index.html.
+In Index document, enter index.html.
 
 ## CloudFront - Secure (HTTPS) Static S3 Website
 
+
 ## Amplify - Host Secure S3 Website & APP (Vitae)
+
 
 ## Elastic Beanstalk - Host APP
 
+
 ## EC2 & Elastic Load Balancer - Host site on Apache Server
 
-Sources: [Linux 2023] (https://docs.aws.amazon.com/linux/al2023/ug/ec2-lamp-amazon-linux-2023.html
+Sources: [Linux 2023] (https://docs.aws.amazon.com/linux/al2023/ug/ec2-lamp-amazon-linux-2023.html)
 
 [AWS Docker] (https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html)
 
@@ -125,9 +109,7 @@ echo "<h1>AWS Demo from $(hostname -f)</h1>" > /var/www/html/index.html
 ### Post ec2 launch - Add ec2-user to docker & apache groups
 sudo usermod -a -G docker ec2-user
 sudo usermod -a -G apache ec2-user
-
-    --logout & login to pickup permissions
-
+if needed, logout & login to pickup permissions
 groups
 docker info
 
@@ -144,32 +126,38 @@ sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
 find /var/www -type f -exec sudo chmod 0664 {} \;
 
 ### Test Server
-    EC2 Console
-    Locate EC2's public dns adddress
-    Click link to launch brower
-    Allow request to timeout or error out
-    Copy url address
-    Open a seperate broswer tab
-    Paste url address but remove 's' from https
+EC2 Console
+Locate EC2's public dns adddress
+Click link to launch brower
+Allow request to timeout or error out
+Copy url address
+Open a seperate broswer tab
+Paste url address but remove 's' from https
 
 ### Static Web Site - S3 & WGET SITE
 
-    AWS CLI
-    aws s3 sync s://bucket-name /var/www/html/
-    rm -rf /var/www/html
-    ls
+aws s3 sync s://bucket-name /var/www/html/
 
-    Down free site from [Free CSS} (https://www.free-css.com/free-css-templates/page296/inance)
+rm headshot.jpg index.html styles.css scripts.js
 
-    cd /var/www/html
+### Download free site from [Free CSS] (https://www.free-css.com/free-css-templates/page296/inance)
+
+cd /var/www/html
+
+ls
+ 
+wget https://www.free-css.com/assets/files/free-css-templates/download/page296/inance.zip
+
+unzip
+ 
+cd inance-html
     
-    Down free site from [Free CSS} (https://www.free-css.com/free-css-templates/page296/inance)
-    
-    wget https://www.free-css.com/assets/files/free-css-templates/download/page296/inance.zip
+sudo mv /home/ec2-user/inance-html/* /var/www/html/
 
-    unzip
-    inance-html
-    sudo mv /home/ec2-user/inance-html/* /var/www/html/
+Test Server
+
+### Configure Application Load Balancer, Target Group, Custom Domain
+
 
 ## Windows 11 (SSH) & WINSCP 
 
