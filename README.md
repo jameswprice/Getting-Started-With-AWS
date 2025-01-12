@@ -24,6 +24,32 @@
 ## OPTIONAL Certificate Manager  (SSL/TLS certificate)
 
 ## S3 - Host Static HTTP Website Hosted on S3
+Source: [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteAccessPermissionsReqd.html)
+
+### Create Bucket & Upload Files 
+[Create S3 Bucket] (https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)
+
+Download & Unzip folder, Resume-HTML
+
+
+###
+
+    Left navigation pane, choose Buckets.
+    Choose Create bucket.
+    Create bucket page opens.
+    Under General configuration, verify AWS Region
+    Under Bucket type, choose General purpose.
+    For Bucket name, enter globhally unique name
+    Uncheck Block Public Access settings for this bucket
+    Check box to acknpwledge unblocking public access
+    Maintain remaining default selections
+    Click icon, Create bucket
+
+### Choose Permissions.
+
+Under Bucket Policy, choose Edit.
+
+Copy the following bucket policy, and paste it in the Bucket policy editor, NOTE Under Resource section, update bucket name.
 
 {
     "Version": "2012-10-17",
@@ -42,6 +68,18 @@
     ]
 }
 
+Click Save changes
+
+### Choose Properties
+
+    Under Static website hosting, choose Edit.
+
+    Choose Use this bucket to host a website.
+
+    Under Static website hosting, choose Enable.
+
+    In Index document, enter index.html.
+
 ## CloudFront - Secure (HTTPS) Static S3 Website
 
 ## Amplify - Host Secure S3 Website & APP (Vitae)
@@ -50,39 +88,44 @@
 
 ## EC2 & Elastic Load Balancer - Host site on Apache Server
 
-Linux 2023 - https://docs.aws.amazon.com/linux/al2023/ug/ec2-lamp-amazon-linux-2023.html
+Sources: [Linux 2023] (https://docs.aws.amazon.com/linux/al2023/ug/ec2-lamp-amazon-linux-2023.html
+
+[AWS Docker] (https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html)
 
 ### User Data - Demo how userdata scripts can be used at startup, scripts are executed as root
 
-        #!/bin/bash
-        #install httpd docker git 
-        yum update -y
-        yum install -y httpd docker
-        service docker start
-        systemctl start httpd
-        systemctl enable httpd
-        echo "<h1>AWS Demo from $(hostname -f)</h1>" > /var/www/html/index.html
+#!/bin/bash
+#install httpd docker git 
+yum update -y
+yum install -y httpd docker
+service docker start
+systemctl start httpd
+systemctl enable httpd
+echo "<h1>AWS Demo from $(hostname -f)</h1>" > /var/www/html/index.html
 
 ### Post ec2 launch - Add ec2-user to docker & apache groups
-        sudo usermod -a -G docker ec2-user
-        sudo usermod -a -G apache ec2-user
-        logout & login to pickup permissions
-        groups
-        docker info
+sudo usermod -a -G docker ec2-user
+sudo usermod -a -G apache ec2-user
+
+    --logout & login to pickup permissions
+
+groups
+docker info
 
 ### Change the group ownership of /var/www and its contents to the apache group
 
-        sudo chown -R ec2-user:apache /var/www
+sudo chown -R ec2-user:apache /var/www
 
 ### Add group write permissions, set group ID, & change the directory permissions of /var/www and subdirectories
 
-        sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
 
 ### Add group write permissions, recursively change the file permissions of /var/www and its subdirectories
 
-        find /var/www -type f -exec sudo chmod 0664 {} \;
+find /var/www -type f -exec sudo chmod 0664 {} \;
 
 ### Test Server
+    EC2 Console
     Locate EC2's public dns adddress
     Click link to launch brower
     Allow request to timeout or error out
