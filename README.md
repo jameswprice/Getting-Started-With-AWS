@@ -7,7 +7,6 @@
 # Billing & Cost Management - Create Budget from Template
 
 [URL](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html)
-[AWS Billing](https://console.aws.amazon.com/cost-management/home)
 
 1. Sign in to the AWS Management Console and open the AWS Cost Management console at ![](https://console.aws.amazon.com/cost-management/home)
 2. In the navigation pane, choose Budgets.
@@ -18,19 +17,97 @@
     Monthly cost budget: A monthly budget that notifies you if you exceed, or are forecasted to exceed, the budget amount.
 
 
-# 
+## IAM - Non-Root, Admin User
 
-## Create Administrative Group
+## OPTIONAL Route 53 (Custom Domain)
 
-## Create non-root, admin user with Access Key & Secret
+## OPTIONAL Certificate Manager  (SSL/TLS certificate)
 
-## Configure Pycharm & Visual Studio 
+## S3 - Host Static HTTP Website Hosted on S3
 
-## Register Domain and Request https certificate
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::Replace-Bucket-Name/*"
+            ]
+        }
+    ]
+}
 
-## Resume Website Hosted on S3 with CloudFront
+## CloudFront - Secure (HTTPS) Static S3 Website
 
-## Resume Website Hosted on EC2 with Load Balancer
+## Amplify - Host Secure S3 Website & APP (Vitae)
 
-## Define EC2
+## Elastic Beanstalk - Host APP
+
+## EC2 & Elastic Load Balancer - Host site on Apache Server
+
+Linux 2023 - https://docs.aws.amazon.com/linux/al2023/ug/ec2-lamp-amazon-linux-2023.html
+
+### User Data - Demo how userdata scripts can be used at startup, scripts are executed as root
+
+        #!/bin/bash
+        #install httpd docker git 
+        yum update -y
+        yum install -y httpd docker
+        service docker start
+        systemctl start httpd
+        systemctl enable httpd
+        echo "<h1>AWS Demo from $(hostname -f)</h1>" > /var/www/html/index.html
+
+### Post ec2 launch - Add ec2-user to docker & apache groups
+        sudo usermod -a -G docker ec2-user
+        sudo usermod -a -G apache ec2-user
+        logout & login to pickup permissions
+        groups
+        docker info
+
+### Change the group ownership of /var/www and its contents to the apache group
+
+        sudo chown -R ec2-user:apache /var/www
+
+### Add group write permissions, set group ID, & change the directory permissions of /var/www and subdirectories
+
+        sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+
+### Add group write permissions, recursively change the file permissions of /var/www and its subdirectories
+
+        find /var/www -type f -exec sudo chmod 0664 {} \;
+
+### Test Server
+    Locate EC2's public dns adddress
+    Click link to launch brower
+    Allow request to timeout or error out
+    Copy url address
+    Open a seperate broswer tab
+    Paste url address but remove 's' from https
+
+### Static Web Site - S3 & WGET SITE
+
+    AWS CLI
+    aws s3 sync s://bucket-name /var/www/html/
+    rm -rf /var/www/html
+    ls
+
+    Down free site from [Free CSS} (https://www.free-css.com/free-css-templates/page296/inance)
+
+    cd /var/www/html
+    
+    Down free site from [Free CSS} (https://www.free-css.com/free-css-templates/page296/inance)
+    
+    wget https://www.free-css.com/assets/files/free-css-templates/download/page296/inance.zip
+
+    unzip
+    inance-html
+    sudo mv /home/ec2-user/inance-html/* /var/www/html/
+
+## Windows 11 (SSH) & WINSCP 
 
