@@ -1,49 +1,68 @@
 
-# Navigating Site
-[aws search](https://github.com/user-attachments/assets/c0a90c43-dc4a-4be5-8292-77377e17122e)
+# Getting Started With AWS
 
-[aws search expanded](https://github.com/user-attachments/assets/08ef5f57-017d-4a0d-93a6-64c9d136dd51)
+AWS Service - Task:
+Billing & Cost Management - Create Budget 
+Identity Access Management (IAM) - Create Non-Root, Admin User & EC2 Service Role
+OPTINAL Route 53 & Certificate Manager
+S3 & CloudFront - Secure Static Web Site w/ custom Domain
+Amplify - Secure Static S3 Website w/ custom Domain & Vite app (GitHub)
+Elastic Beanstalk - Host Python App with Secure Custom Domain
+EC2 & Application Load Balancer - Apache web server w/ secure Custom Domain
+Windows 11 - Configure SSH, AWS CLI & WINSCP
 
-# Billing & Cost Management - Create Budget from Template
 
-[URL](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html)
 
-1. Sign in to the AWS Management Console and open the AWS Cost Management console at ![](https://console.aws.amazon.com/cost-management/home)
-2. In the navigation pane, choose Budgets.
-3. At the top of the page, choose Create budget.
-4. Under Budget setup, choose Use a template (simplified).
-5. Under Templates, choose a template that best matches your use case:
-    Zero spend budget: A budget that notifies you after your spending exceeds AWS Free Tier limits.
-    Monthly cost budget: A monthly budget that notifies you if you exceed, or are forecasted to exceed, the budget amount.
+## Billing & Cost Management - Create Budget from Template
 
+[Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html)
+
+Sign in to the AWS Management Console
+
+Search for Billing and Cost Management 
+
+On left, choose Budgets
+
+At the top of the page, choose Create budget
+
+Under Budget setup, choose Use a template (simplified)
+
+Under Templates, choose a template that best matches your use case:
+
+    (select) Zero spend budget: A budget that notifies you after your spending exceeds AWS Free Tier limits.
+
+Enter Email Receiptents
+
+Create Budget
 
 ## IAM - Non-Root, Admin User
 
+
 ## OPTIONAL Route 53 (Custom Domain)
 
+
 ## OPTIONAL Certificate Manager  (SSL/TLS certificate)
+
 
 ## S3 - Host Static HTTP Website Hosted on S3
 Source: [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteAccessPermissionsReqd.html)
 
+
 ### Create Bucket & Upload Files 
 [Create S3 Bucket] (https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)
 
-Download & Unzip folder, Resume-HTML
+**** Download & Unzip folder, Resume-HTML
 
-
-###
-
-    Left navigation pane, choose Buckets.
-    Choose Create bucket.
-    Create bucket page opens.
-    Under General configuration, verify AWS Region
-    Under Bucket type, choose General purpose.
-    For Bucket name, enter globhally unique name
-    Uncheck Block Public Access settings for this bucket
-    Check box to acknpwledge unblocking public access
-    Maintain remaining default selections
-    Click icon, Create bucket
+Left navigation pane, choose Buckets.
+Choose Create bucket.
+Create bucket page opens.
+Under General configuration, verify AWS Region
+Under Bucket type, choose General purpose.
+For Bucket name, enter globhally unique name
+Uncheck Block Public Access settings for this bucket
+Check box to acknpwledge unblocking public access
+Maintain remaining default selections
+Click icon, Create bucket
 
 ### Choose Permissions.
 
