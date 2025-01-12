@@ -2,14 +2,23 @@
 # Getting Started With AWS
 
 AWS Service - Task:
+
 Billing & Cost Management - Create Budget 
+
 Identity Access Management (IAM) - Create Non-Root, Admin User & EC2 Service Role
+
 OPTINAL Route 53 & Certificate Manager
+
 S3 & CloudFront - Secure Static Web Site w/ custom Domain
+
 Amplify - Secure Static S3 Website w/ custom Domain & Vite app (GitHub)
+
 Elastic Beanstalk - Host Python App with Secure Custom Domain
+
 EC2 & Application Load Balancer - Apache web server w/ secure Custom Domain
+
 Windows 11 - Configure SSH, AWS CLI & WINSCP
+
 
 
 
